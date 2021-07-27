@@ -1,0 +1,86 @@
+// Block Placeholder
+
+@function txf-stripe($color) {
+  $transparent: rgba($color, 0);
+  @return linear-gradient(
+    135deg,
+    $color,
+    $color 12.5%,
+    $transparent 12.5%,
+    $transparent 37.5%,
+    $color 37.5%,
+    $color 62.5%,
+    $transparent 62.5%,
+    $transparent 87.5%,
+    $color 87.5%,
+    $color
+  );
+}
+
+@mixin tx-stripes($width, $color: $red) {
+  $side: #{txf-sqrt(txf-pow(txf-stripUnit($width) * 4, 2) / 2)}px;
+  background-image: txf-stripe($color);
+  background-size: $side $side;
+}
+
+@mixin tx-block($color: $red) {
+  @include tx-stripes(1.5px, $color);
+}
+
+@mixin tx-icon($width: 15px, $height: 15px) {
+  @include tx-block;
+  width: $width;
+  height: $height;
+}
+
+// Pseudo Element
+
+@mixin tx-pseudo(
+  $position: absolute,
+  $display: block,
+  $content: '',
+  $ie: $tx-IE,
+  $extend: true
+) {
+  @if $position ==
+    'absolute' and
+    $display ==
+    'block' and
+    $content ==
+    '' and
+    $extend ==
+    true
+  {
+    position: absolute;
+    display: block;
+    content: '';
+  } @else {
+    @if $display == 'inline-block' {
+      display: inline-block;
+    } @else {
+      display: $display;
+    }
+    @if not $ie {
+      content: '' + $content;
+    }
+    position: $position;
+  }
+}
+
+// Vertical Alignment
+
+@mixin tx-pseudo-va {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+  content: '';
+}
+
+// Layers
+
+@mixin tx-layer($layer: content, $shift: 0) {
+  $zIndex: map-get($layers, $layer);
+  z-index: ($zIndex + $shift);
+}

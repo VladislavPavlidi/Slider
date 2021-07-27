@@ -1,0 +1,655 @@
+/* Baseline, Typography & Vertical Rhythm */
+
+html {
+  font-size: $fontSize;
+  text-size-adjust: 100%;
+  line-height: $lineHeight;
+}
+
+body {
+  @include tx-hyphens;
+  color: $text;
+  font-family: $fontFamily;
+  font-feature-settings: 'liga' 1, 'clig' 1, 'kern' 1;
+  font-display: swap;
+}
+
+article,
+aside,
+canvas,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+nav,
+main,
+progress,
+section,
+summary {
+  display: block;
+}
+
+%heading {
+  @include tx-rhythm(2, 1);
+  font-weight: bold;
+  text-rendering: auto;
+  page-break-after: avoid;
+  break-after: avoid;
+  orphans: 3;
+  widows: 3;
+}
+
+h1 {
+  @extend %heading;
+  @include tx-font-size(h1);
+}
+
+h2 {
+  @extend %heading;
+  @include tx-font-size(h2);
+}
+
+h3 {
+  @extend %heading;
+  @include tx-font-size(h3);
+}
+
+h4 {
+  @extend %heading;
+  @include tx-font-size(h4);
+}
+
+h5 {
+  @extend %heading;
+  @include tx-font-size(h5);
+}
+
+h6 {
+  @extend %heading;
+  @include tx-font-size(h6);
+}
+
+%list {
+  padding: 0 0 0 1em;
+
+  &-nested {
+    @include tx-rhythm(1, 1);
+  }
+}
+
+%mono {
+  font-family: $font-mono;
+}
+
+p {
+  @include tx-rhythm(1, 1);
+}
+
+dl {
+  @include tx-rhythm(1, 1);
+}
+
+dt {
+  @include tx-rhythm(1, 1);
+  font-weight: bold;
+}
+
+dd {
+  @include tx-rhythm(1, 1);
+  @extend %list;
+  font-style: italic;
+}
+
+ul {
+  @include tx-rhythm(1, 1);
+  @extend %list;
+  list-style: disc;
+}
+
+ol {
+  @include tx-rhythm(1, 1);
+  @extend %list;
+  list-style: decimal;
+}
+
+li {
+  @include tx-rhythm(0.5, 0.5);
+
+  > ul {
+    @extend %list-nested;
+  }
+
+  > ol {
+    @extend %list-nested;
+  }
+}
+
+%attention {
+  font-weight: bold;
+}
+
+$highlight-color: $red;
+
+%highlight {
+  color: $highlight-color;
+}
+
+pre {
+  @include tx-rhythm(1, 1);
+  @extend %mono;
+  padding: 0 1.5em;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  tab-size: 2;
+}
+
+code {
+  @extend %highlight;
+  @extend %mono;
+}
+
+samp {
+  @extend %highlight;
+  @extend %mono;
+}
+
+var {
+  @extend %attention;
+  @extend %highlight;
+  @extend %mono;
+  font-style: normal;
+}
+
+tt {
+  @extend %mono;
+}
+
+strong {
+  @extend %attention;
+}
+
+b {
+  @extend %attention;
+}
+
+%quoteEmphasis {
+  font-style: italic;
+}
+
+%quotes {
+  quotes: none;
+
+  &:before,
+  &:after {
+    content: none;
+  }
+}
+
+blockquote {
+  @extend %quotes;
+  @include tx-rhythm(1, 1, $marginRight: 3em, $marginLeft: 3em);
+  font-style: italic;
+}
+
+em {
+  font-style: italic;
+}
+
+cite {
+  font-style: italic;
+}
+
+q {
+  @extend %quotes;
+  font-style: italic;
+}
+
+i {
+  font-style: italic;
+}
+
+%interactive {
+  text-decoration: none;
+  cursor: help;
+}
+
+$interactiveHighlight-color: $blue;
+
+%interactiveHighlight {
+  color: $interactiveHighlight-color;
+  border-bottom: 1px dotted $interactiveHighlight-color;
+}
+
+%removed {
+  text-decoration: line-through;
+}
+
+%acronymAbbr {
+  margin: 0 -0.075em 0 0;
+  letter-spacing: 0.075em;
+}
+
+%small {
+  @include tx-font-size(small, 0);
+}
+
+%supSub {
+  @extend %small;
+  position: relative;
+}
+
+address {
+  @include tx-rhythm(1, 1);
+  font-style: normal;
+}
+
+dfn {
+  @extend %attention;
+}
+
+acronym {
+  @extend %acronymAbbr;
+  @extend %attention;
+  @extend %interactive;
+  @extend %interactiveHighlight;
+}
+
+abbr {
+  @extend %acronymAbbr;
+  @extend %attention;
+  @extend %interactive;
+  @extend %interactiveHighlight;
+}
+
+ins {
+  @extend %interactive;
+  @extend %interactiveHighlight;
+}
+
+mark {
+  @extend %interactiveHighlight;
+}
+
+$del-color: $gray;
+$del-borderWidth: 1px;
+
+del {
+  @extend %removed;
+  color: $del-color;
+  border-bottom: $del-borderWidth dotted $del-color;
+}
+
+strike {
+  @extend %removed;
+}
+
+s {
+  @extend %removed;
+}
+
+$kbd-background: $gray;
+
+kbd {
+  @extend %attention;
+  @include tx-grid-height(1, 1);
+  display: inline-block;
+  padding: 0 0.25em;
+  font-weight: bold;
+  font-family: $font-mono;
+  vertical-align: top;
+  background: $kbd-background;
+  background-clip: padding-box;
+  border-radius: 3px;
+}
+
+sup {
+  @extend %supSub;
+  top: -0.65em;
+}
+
+sub {
+  @extend %supSub;
+  bottom: -0.25em;
+}
+
+big {
+  @include tx-font-size(large, 0);
+}
+
+small {
+  @extend %small;
+}
+
+u {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}
+
+audio {
+  @include tx-rhythm(1, 1);
+}
+
+video {
+  @include tx-rhythm(1, 1);
+}
+
+$tableCell-borderColor: $gray;
+
+%tableCell {
+  @include tx-table-borders(
+    1px,
+    1,
+    $color: $tableCell-borderColor,
+    $paddingRight: ($gap / 2),
+    $paddingLeft: ($gap / 2)
+  );
+}
+
+caption {
+  @include tx-rhythm-padding(0, 0.5);
+  font-weight: bold;
+  text-align: left;
+}
+
+table {
+  @include tx-rhythm(1, 1);
+  width: 100%;
+  empty-cells: hide;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td {
+  @extend %tableCell;
+}
+
+th {
+  @extend %attention;
+  @extend %tableCell;
+  text-align: left;
+}
+
+hr {
+  $hr-borderColor: $black;
+
+  @include tx-rhythm(1, 1);
+  display: block;
+  height: 0;
+  padding: 0;
+  border-top: 1px solid $hr-borderColor;
+}
+
+/* Selection */
+
+::selection {
+  color: $selection-color;
+  background: $selection-background;
+}
+
+/* Focus */
+
+%focus {
+  &:focus {
+    outline: $focus-outlineWidth dotted $focus-outlineColor;
+  }
+}
+
+/* Links */
+
+$tapColor: rgba($active, 0.25);
+
+a {
+  @extend %focus;
+  @include tx-link($link, $visited, $hover, $active);
+  -webkit-tap-highlight-color: $tapColor;
+  text-decoration: underline;
+  text-decoration-skip: ink;
+  transition: color $UITransitionDefault;
+
+  @include tx-media(coarse) {
+    @include tx-link($link, $visited, $link, $link);
+  }
+}
+
+/* Forms */
+
+fieldset {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+$legend-padding: 1.5em;
+
+legend {
+  position: relative;
+  left: -$legend-padding;
+  padding: 0 $legend-padding;
+  font-weight: bold;
+}
+
+label {
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+%formBaseline {
+  @extend %focus;
+  margin: 0;
+  font-family: inherit;
+}
+
+%formFont {
+  font-size: inherit;
+}
+
+%formBorderReset {
+  &::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+  }
+}
+
+%form {
+  border: $field-borderWidth solid $field-borderColor;
+}
+
+%formInput {
+  padding: 0 ($gap / 2);
+}
+
+%formTextReset {
+  text-transform: none;
+}
+
+%formAlign {
+  vertical-align: top;
+}
+
+%formRadioCheckbox {
+  box-sizing: border-box;
+  height: auto;
+  padding: 0;
+  vertical-align: middle;
+  border: 0;
+}
+
+%formAppearanceReset {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+$formPlaceholder-color: $gray;
+
+%formPlaceholder {
+  &::-webkit-input-placeholder {
+    color: $formPlaceholder-color;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder {
+    color: $formPlaceholder-color;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: $formPlaceholder-color;
+    opacity: 1;
+  }
+
+  &:-moz-placeholder {
+    color: $formPlaceholder-color;
+    opacity: 1;
+  }
+
+  &::placeholder {
+    color: $formPlaceholder-color;
+    opacity: 1;
+  }
+}
+
+%button {
+  @include tx-grid-height(2, $setLineHeight: false);
+  padding: 0 ($gap / 2);
+  border: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+%formInactive {
+  cursor: default;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+input {
+  @extend %form;
+  @extend %formInput;
+  @extend %formAlign;
+  @extend %formBaseline;
+  @extend %formBorderReset;
+  @extend %formFont;
+  @extend %formPlaceholder;
+  @include tx-form-height(2, $setLineHeight: false);
+  box-shadow: none;
+
+  &[type='radio'] {
+    @extend %formRadioCheckbox;
+  }
+
+  &[type='checkbox'] {
+    @extend %formRadioCheckbox;
+  }
+
+  &[type='submit'] {
+    @extend %formAppearanceReset;
+    @extend %button;
+  }
+
+  &[type='reset'] {
+    @extend %formAppearanceReset;
+    @extend %button;
+  }
+
+  &[type='button'] {
+    @extend %formAppearanceReset;
+    @extend %button;
+  }
+
+  &[type='file'] {
+    height: auto;
+    border: 0;
+  }
+
+  &[type='search'] {
+    @extend %formAppearanceReset;
+
+    ::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  &[type='number'] {
+    @extend %formAppearanceReset;
+
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  &:disabled {
+    @extend %formInactive;
+  }
+
+  &[readonly] {
+    @extend %formInactive;
+  }
+}
+
+select {
+  @extend %form;
+  @extend %formAlign;
+  @extend %formBaseline;
+  @extend %formFont;
+  @extend %formTextReset;
+  @include tx-grid-height(2, $setLineHeight: false);
+  vertical-align: top;
+  touch-action: manipulation;
+
+  &[multiple] {
+    @include tx-grid-height(5, $setLineHeight: false);
+  }
+}
+
+button {
+  @extend %formAppearanceReset;
+  @extend %formBaseline;
+  @extend %formBorderReset;
+  @extend %formFont;
+  @extend %formTextReset;
+  @extend %button;
+
+  &:disabled {
+    @extend %formInactive;
+  }
+}
+
+textarea {
+  display: block;
+  @extend %form;
+  @extend %formBaseline;
+  @extend %formPlaceholder;
+  @include tx-form-height(8, 1);
+  @include tx-rhythm-padding(
+    0.5,
+    0.5,
+    $paddingRight: ($gap / 2),
+    $paddingLeft: ($gap / 2)
+  );
+  overflow: auto;
+  font-size: inherit;
+
+  &:disabled {
+    @extend %formInactive;
+  }
+
+  &[readonly] {
+    @extend %formInactive;
+  }
+}
+
+/* Print Baseline */
+
+@import '_baseline-print';

@@ -1,0 +1,54 @@
+/* Reset */
+
+%u-positionReset {
+  position: initial;
+}
+
+%u-boxReset {
+  margin: 0;
+  padding: 0;
+}
+
+/* Lists Reset */
+
+%u-bulletReset {
+  &:after {
+    display: none;
+  }
+}
+
+%u-listReset {
+  @extend %u-boxReset;
+  list-style: none;
+
+  > li {
+    @extend %u-positionReset;
+    @extend %u-boxReset;
+    @extend %u-bulletReset;
+  }
+}
+
+%u-descriptionListReset {
+  @extend %u-boxReset;
+
+  > dt,
+  > dd {
+    @extend %u-boxReset;
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+/* Visually Hidden */
+
+%u-visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  clip: rect(0 0 0 0);
+}
