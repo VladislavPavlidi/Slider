@@ -1,3 +1,5 @@
+$slide-marginRight: 40px;
+
 .slider {
   display: flex;
   flex-wrap: wrap;
@@ -9,9 +11,15 @@
 
 .slider__title {
   color: $blue;
-  width: 50%;
+  width: calc(50% + (#{$slide-marginRight} / 2));
   font-size: 50px;
   margin: 0;
+}
+
+.slider__control-holder {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
 }
 
 .slider__control {
@@ -19,7 +27,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
+  width: calc(50% - (#{$slide-marginRight} / 2));
 }
 
 .slider__scrollbar {
@@ -67,4 +75,11 @@
       transform: rotate(-135deg) translate(-50%, -50%);
     }
   }
+}
+
+.slider__content {
+  display: flex;
+  margin-top: 40px;
+  position: relative;
+  width: 100%;
 }
