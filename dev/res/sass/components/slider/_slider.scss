@@ -3,10 +3,12 @@ $slide-marginRight: 40px;
 .slider {
   display: flex;
   flex-wrap: wrap;
-  padding: 160px 140px;
+  padding: 160px 0;
+  margin: auto;
+  overflow: hidden;
   flex-direction: row;
   box-sizing: border-box;
-  width: 100%;
+  width: 80%;
 }
 
 .slider__title {
@@ -82,5 +84,4 @@ $slide-marginRight: 40px;
   margin-top: 40px;
   position: relative;
   width: 100%;
-  overflow: hidden;
 }

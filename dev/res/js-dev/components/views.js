@@ -1,3 +1,5 @@
+import slider from 'views/slider';
+
 export default function init() {
-  console.log('im here');
+  slider();
 }
