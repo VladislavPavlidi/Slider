@@ -8,6 +8,9 @@ let parent;
 let slides;
 let scrollbar;
 let scrollbarFill;
+let pointStartX;
+let sliderTranslation;
+let horizontalCondition;
 
 let instance;
 
@@ -31,11 +34,11 @@ function translateSlider(translation) {
 }
 
 function isFirstSlide() {
-  return instance.activeIndex === 1;
+  return instance.activeIndex === 0;
 }
 
 function isLastSlide() {
-  return instance.activeIndex === slides.length - (slidesPerScreen + 1);
+  return instance.activeIndex === slides.length - slidesPerScreen;
 }
 
 function setScrollbarFill() {
@@ -46,7 +49,7 @@ function setScrollbarFill() {
 
 function onPrevClick() {
   const { scroll, width, activeIndex } = instance;
-  if (isFirstSlide()) {
+  if (instance.activeIndex === 1) {
     prev.disabled = true;
   }
   instance.scroll = scroll + (width / slidesPerScreen + 40 / slidesPerScreen);
@@ -58,7 +61,7 @@ function onPrevClick() {
 
 function onNextClick() {
   const { scroll, width, activeIndex } = instance;
-  if (isLastSlide()) {
+  if (instance.activeIndex === slides.length - (slidesPerScreen + 1)) {
     next.disabled = true;
   }
   instance.scroll = scroll - (width / slidesPerScreen + 40 / slidesPerScreen);
@@ -79,9 +82,34 @@ function initInstance() {
   };
 }
 
+function onTouchMove(event) {
+  horizontalCondition = event.touches[0].pageX - pointStartX;
+  sliderTranslation = event.touches[0].pageX - pointStartX + instance.scroll;
+  sliderContent.style = `transform: translateX(${sliderTranslation}px); transition: 0s`;
+}
+
+function onTouchEnd() {
+  if (horizontalCondition < 0 && !isLastSlide()) {
+    onNextClick();
+  } else if (horizontalCondition > 0 && !isFirstSlide()) {
+    onPrevClick();
+  } else {
+    sliderContent.style = `transform: translateX(${instance.scroll}px);`;
+  }
+  document.removeEventListener('touchmove', onTouchMove);
+  document.removeEventListener('touchend', onTouchEnd);
+}
+
+function onTouchStart(event) {
+  pointStartX = event ? event.touches[0].pageX : 0;
+  document.addEventListener('touchmove', onTouchMove);
+  document.addEventListener('touchend', onTouchEnd);
+}
+
 function subscribe() {
   prev.addEventListener('click', onPrevClick);
   next.addEventListener('click', onNextClick);
+  sliderContent.addEventListener('touchstart', onTouchStart);
 }
 
 export default function init() {
