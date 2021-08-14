@@ -1,3 +1,4 @@
+const TABLET_THRESHOLD = 1200;
 const SLIDES_PER_SCREEN = 4;
 
 let prev;
@@ -20,6 +21,11 @@ function findElements() {
   scrollbarFill = scrollbar.querySelector('.slider__scrollbar-fill');
 }
 
+function isMobile() {
+  const { innerWidth } = window;
+  return innerWidth < TABLET_THRESHOLD;
+}
+
 function translateSlider(translation) {
   sliderContent.style = `transform: translateX(${translation}px);`;
 }
@@ -33,9 +39,9 @@ function isLastSlide() {
 }
 
 function setScrollbarFill() {
-  scrollbarFill.style = `width: ${
+  scrollbarFill.style = `width: ${Math.round(
     (instance.activeIndex * 100) / (slides.length - SLIDES_PER_SCREEN)
-  }%`;
+  )}%`;
 }
 
 function onPrevClick() {
@@ -82,6 +88,7 @@ function subscribe() {
 
 export default function init() {
   findElements();
+  console.log(isMobile());
   initInstance();
   subscribe();
 }
