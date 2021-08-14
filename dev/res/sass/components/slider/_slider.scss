@@ -17,12 +17,20 @@ $slide-marginRight: 40px;
   font-size: 50px;
   line-height: 1;
   margin: 0;
+
+  @include tx-media(tablet) {
+    width: 100%;
+  }
 }
 
 .slider__control-holder {
   display: flex;
   width: 100%;
   flex-direction: row;
+
+  @include tx-media(tablet) {
+    flex-wrap: wrap;
+  }
 }
 
 .slider__control {
@@ -33,7 +41,8 @@ $slide-marginRight: 40px;
   width: calc(50% - (#{$slide-marginRight} / 2));
 
   @include tx-media(tablet) {
-    display: none;
+    // display: none;
+    width: 100%;
   }
 }
 

@@ -18,11 +18,23 @@ $slide-marginRight: 40px;
   &:nth-last-child() {
     margin-right: 0;
   }
+
+  @include tx-media(tablet) {
+    width: 100%;
+  }
 }
 
 .slide__image-holder {
   width: 100%;
   height: 170px;
+
+  @include tx-media(tablet) {
+    height: 400px;
+  }
+
+  @include tx-media(phone) {
+    height: 250px
+  }
 }
 
 .slide__image {
