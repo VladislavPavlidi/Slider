@@ -15,6 +15,7 @@ $slide-marginRight: 40px;
   color: $blue;
   width: calc(50% + (#{$slide-marginRight} / 2));
   font-size: 50px;
+  line-height: 1;
   margin: 0;
 }
 
@@ -53,8 +54,6 @@ $slide-marginRight: 40px;
     position: absolute;
     top: 50%;
     left: 50%;
-    // transform: rotate(45deg) translate(-100%, 15%);
-    // transform: translate(-50%, -50%);
     width: 10px;
     height: 10px;
     border-top: 1px solid $blue;
@@ -75,6 +74,12 @@ $slide-marginRight: 40px;
       top: 30%;
       left: 45%;
       transform: rotate(-135deg) translate(-50%, -50%);
+    }
+  }
+
+  &:disabled {
+    &:hover {
+      background-color: $white;
     }
   }
 }

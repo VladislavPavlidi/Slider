@@ -58,9 +58,9 @@ function initInstance() {
   };
 }
 
-function subscribe(object) {
-  prev.addEventListener('click', () => onPrevClick(object));
-  next.addEventListener('click', () => onNextClick(object));
+function subscribe() {
+  prev.addEventListener('click', onPrevClick);
+  next.addEventListener('click', onNextClick);
 }
 
 export default function init() {
