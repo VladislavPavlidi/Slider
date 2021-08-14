@@ -1,20 +1,37 @@
 /* Layout */
 
+// sass-lint:disable no-vendor-prefixes
+
 html {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   min-height: 100%;
 }
 
+// sass-lint:enable no-vendor-prefixes
+// sass-lint:disable zero-unit
+
 body {
-  @include tx-boundaries;
+  #{--scrollbar-width}: calc(100vw - 100%);
   position: relative;
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  overflow-x: hidden;
+  margin: 0;
   background: $background;
 }
-
 /* Phone Layout */
 
 @import '_layout-phone';
+
+
 
 /* Print Layout */
 

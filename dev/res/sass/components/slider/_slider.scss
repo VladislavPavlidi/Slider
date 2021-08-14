@@ -31,6 +31,10 @@ $slide-marginRight: 40px;
   align-items: center;
   justify-content: space-between;
   width: calc(50% - (#{$slide-marginRight} / 2));
+
+  @include tx-media(tablet) {
+    display: none;
+  }
 }
 
 .slider__scrollbar {

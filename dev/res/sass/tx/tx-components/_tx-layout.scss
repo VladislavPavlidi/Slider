@@ -1,11 +1,10 @@
+// TemplateX Layout
+
+
+
 // Page Boundaries
 
-@mixin tx-boundaries(
-  $minWidth: map-get($breakpoints, desktopMin),
-  $maxWidth: map-get($breakpoints, desktopMax),
-  $minHeight: 100%,
-  $center: true
-) {
+@mixin tx-boundaries($minWidth: map-get($breakpoints, desktopMin), $maxWidth: map-get($breakpoints, desktopMax), $minHeight: 100%, $center: true) {
   @if $minWidth != none and $minWidth != 0 {
     min-width: $minWidth;
   }
@@ -20,7 +19,11 @@
   }
 }
 
+
+
 // Page Scroll
+
+// sass-lint:disable no-vendor-prefixes
 
 @mixin tx-scroll-bar($condition: false, $autohide: true) {
   @if $condition == true {
@@ -33,3 +36,5 @@
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
 }
+
+// sass-lint:enable no-vendor-prefixes

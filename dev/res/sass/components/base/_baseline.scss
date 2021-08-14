@@ -1,5 +1,9 @@
 /* Baseline, Typography & Vertical Rhythm */
 
+%block {
+  display: block;
+}
+
 html {
   font-size: $fontSize;
   text-size-adjust: 100%;
@@ -12,6 +16,10 @@ body {
   font-family: $fontFamily;
   font-feature-settings: 'liga' 1, 'clig' 1, 'kern' 1;
   font-display: swap;
+}
+
+main {
+  @extend %block;
 }
 
 article,
