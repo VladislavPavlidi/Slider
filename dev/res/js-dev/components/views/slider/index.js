@@ -13,19 +13,27 @@ function findElements() {
 }
 
 function translateSlider(translation) {
-  sliderContent.style = `transform: translateX(${translation}%); transition: 1s`;
+  sliderContent.style = `transform: translateX(${translation}px); transition: 0.3s`;
 }
 
 function onPrevClick() {
-  const { scroll } = instance;
-  instance.scroll = scroll + 26;
+  const { scroll, width } = instance;
+  instance.scroll = scroll + (width / 4 + 40 / 4);
   translateSlider(instance.scroll);
 }
 
 function onNextClick() {
-  const { scroll } = instance;
-  instance.scroll = scroll - 26;
+  const { scroll, width } = instance;
+  instance.scroll = scroll - (width / 4 + 40 / 4);
   translateSlider(instance.scroll);
+}
+
+function initInstance() {
+  instance = {
+    node: sliderContent,
+    scroll: 0,
+    width: sliderContent.offsetWidth,
+  };
 }
 
 function subscribe(object) {
@@ -35,6 +43,6 @@ function subscribe(object) {
 
 export default function init() {
   findElements();
-  instance = { node: sliderContent, scroll: 0 };
-  subscribe(instance);
+  initInstance();
+  subscribe();
 }
