@@ -83,5 +83,6 @@ $slide-marginRight: 40px;
   display: flex;
   margin-top: 40px;
   position: relative;
+  transition: $UITransitionMedium;
   width: 100%;
 }
