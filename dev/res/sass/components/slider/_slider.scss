@@ -20,6 +20,7 @@ $slide-marginRight: 40px;
 
   @include tx-media(tablet) {
     width: 100%;
+    margin-bottom: 25px;
   }
 }
 
@@ -41,7 +42,6 @@ $slide-marginRight: 40px;
   width: calc(50% - (#{$slide-marginRight} / 2));
 
   @include tx-media(tablet) {
-    // display: none;
     width: 100%;
   }
 }

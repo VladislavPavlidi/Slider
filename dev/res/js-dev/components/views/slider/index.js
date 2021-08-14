@@ -1,6 +1,6 @@
 const TABLET_THRESHOLD = 1200;
-const SLIDES_PER_SCREEN = 4;
 
+let slidesPerScreen;
 let prev;
 let next;
 let sliderContent;
@@ -35,12 +35,12 @@ function isFirstSlide() {
 }
 
 function isLastSlide() {
-  return instance.activeIndex === slides.length - 5;
+  return instance.activeIndex === slides.length - (slidesPerScreen + 1);
 }
 
 function setScrollbarFill() {
   scrollbarFill.style = `width: ${Math.round(
-    (instance.activeIndex * 100) / (slides.length - SLIDES_PER_SCREEN)
+    (instance.activeIndex * 100) / (slides.length - slidesPerScreen)
   )}%`;
 }
 
@@ -49,8 +49,7 @@ function onPrevClick() {
   if (isFirstSlide()) {
     prev.disabled = true;
   }
-  instance.scroll =
-    scroll + (width / SLIDES_PER_SCREEN + 40 / SLIDES_PER_SCREEN);
+  instance.scroll = scroll + (width / slidesPerScreen + 40 / slidesPerScreen);
   instance.activeIndex = activeIndex - 1;
   translateSlider(instance.scroll);
   next.disabled = false;
@@ -62,8 +61,7 @@ function onNextClick() {
   if (isLastSlide()) {
     next.disabled = true;
   }
-  instance.scroll =
-    scroll - (width / SLIDES_PER_SCREEN + 40 / SLIDES_PER_SCREEN);
+  instance.scroll = scroll - (width / slidesPerScreen + 40 / slidesPerScreen);
   instance.activeIndex = activeIndex + 1;
   translateSlider(instance.scroll);
   prev.disabled = false;
@@ -88,7 +86,11 @@ function subscribe() {
 
 export default function init() {
   findElements();
-  console.log(isMobile());
+  if (isMobile()) {
+    slidesPerScreen = 1;
+  } else {
+    slidesPerScreen = 4;
+  }
   initInstance();
   subscribe();
 }
