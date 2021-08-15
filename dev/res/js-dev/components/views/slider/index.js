@@ -106,10 +106,40 @@ function onTouchStart(event) {
   document.addEventListener('touchend', onTouchEnd);
 }
 
+function onMouseMove(event) {
+  horizontalCondition = event.pageX - pointStartX;
+  sliderTranslation = event.pageX - pointStartX + instance.scroll;
+  sliderContent.style = `transform: translateX(${sliderTranslation}px); transition: 0s`;
+}
+
+function onMouseUp() {
+  if (horizontalCondition < 0 && !isLastSlide()) {
+    onNextClick();
+  } else if (horizontalCondition > 0 && !isFirstSlide()) {
+    onPrevClick();
+  } else {
+    sliderContent.style = `transform: translateX(${instance.scroll}px);`;
+  }
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
+  document.removeEventListener('mouseleave', onMouseUp);
+}
+
+function onMouseDown(event) {
+  pointStartX = event ? event.pageX : 0;
+  document.addEventListener('mouseup', onMouseUp);
+  document.addEventListener('mouseleave', onMouseUp);
+  document.addEventListener('mousemove', onMouseMove);
+}
+
 function subscribe() {
   prev.addEventListener('click', onPrevClick);
   next.addEventListener('click', onNextClick);
-  sliderContent.addEventListener('touchstart', onTouchStart);
+  if (isMobile()) {
+    sliderContent.addEventListener('touchstart', onTouchStart);
+  } else {
+    sliderContent.addEventListener('mousedown', onMouseDown);
+  }
 }
 
 export default function init() {
