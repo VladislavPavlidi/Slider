@@ -51,6 +51,10 @@ $slide-marginRight: 40px;
   width: 60%;
   height: 2px;
   background-color: $blue-50;
+
+  @include tx-media(phone) {
+    width: 100%;
+  }
 }
 
 .slider__scrollbar-fill {
@@ -103,6 +107,10 @@ $slide-marginRight: 40px;
     &:hover {
       background-color: $white;
     }
+  }
+
+  @include tx-media(phone) {
+    display: none;
   }
 }
 

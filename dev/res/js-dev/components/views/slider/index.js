@@ -120,15 +120,13 @@ function onMouseUp() {
   } else {
     sliderContent.style = `transform: translateX(${instance.scroll}px);`;
   }
-  document.removeEventListener('mousemove', onMouseMove);
   document.removeEventListener('mouseup', onMouseUp);
-  document.removeEventListener('mouseleave', onMouseUp);
+  document.removeEventListener('mousemove', onMouseMove);
 }
 
 function onMouseDown(event) {
   pointStartX = event ? event.pageX : 0;
   document.addEventListener('mouseup', onMouseUp);
-  document.addEventListener('mouseleave', onMouseUp);
   document.addEventListener('mousemove', onMouseMove);
 }
 
