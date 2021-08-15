@@ -1,4 +1,5 @@
 const TABLET_THRESHOLD = 1200;
+const AUTO_PLAY_TIME = 4000;
 
 let slidesPerScreen;
 let prev;
@@ -124,6 +125,28 @@ function onMouseUp() {
   document.removeEventListener('mousemove', onMouseMove);
 }
 
+function setStartSliderCondition() {
+  initInstance();
+  sliderContent.style = 'transform: translateX(0);';
+  scrollbarFill.style = 'width: 0';
+  prev.disabled = true;
+  next.disabled = false;
+}
+
+function autoPlay() {
+  setTimeout(() => {
+    if (
+      instance.activeIndex === slides.length - (slidesPerScreen + 1) ||
+      isLastSlide()
+    ) {
+      setStartSliderCondition();
+    } else {
+      onNextClick();
+    }
+    autoPlay();
+  }, AUTO_PLAY_TIME);
+}
+
 function onMouseDown(event) {
   pointStartX = event ? event.pageX : 0;
   document.addEventListener('mouseup', onMouseUp);
@@ -149,4 +172,5 @@ export default function init() {
   }
   initInstance();
   subscribe();
+  autoPlay();
 }
