@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-cycle
+import autoPlay from './autoplay';
+
 const TABLET_THRESHOLD = 1200;
-const AUTO_PLAY_TIME = 4000;
 
 let slidesPerScreen;
 let prev;
@@ -38,7 +40,7 @@ function isFirstSlide() {
   return instance.activeIndex === 0;
 }
 
-function isLastSlide() {
+export function isLastSlide() {
   return instance.activeIndex === slides.length - slidesPerScreen;
 }
 
@@ -53,6 +55,7 @@ function onPrevClick() {
   if (instance.activeIndex === 1) {
     prev.disabled = true;
   }
+  autoPlay(instance);
   instance.scroll = scroll + (width / slidesPerScreen + 40 / slidesPerScreen);
   instance.activeIndex = activeIndex - 1;
   translateSlider(instance.scroll);
@@ -60,11 +63,12 @@ function onPrevClick() {
   setScrollbarFill();
 }
 
-function onNextClick() {
+export function onNextClick() {
   const { scroll, width, activeIndex } = instance;
   if (instance.activeIndex === slides.length - (slidesPerScreen + 1)) {
     next.disabled = true;
   }
+  autoPlay(instance);
   instance.scroll = scroll - (width / slidesPerScreen + 40 / slidesPerScreen);
   instance.activeIndex = activeIndex + 1;
   translateSlider(instance.scroll);
@@ -125,26 +129,13 @@ function onMouseUp() {
   document.removeEventListener('mousemove', onMouseMove);
 }
 
-function setStartSliderCondition() {
+export function setStartSliderCondition() {
   initInstance();
   sliderContent.style = 'transform: translateX(0);';
   scrollbarFill.style = 'width: 0';
   prev.disabled = true;
   next.disabled = false;
-}
-
-function autoPlay() {
-  setTimeout(() => {
-    if (
-      instance.activeIndex === slides.length - (slidesPerScreen + 1) ||
-      isLastSlide()
-    ) {
-      setStartSliderCondition();
-    } else {
-      onNextClick();
-    }
-    autoPlay();
-  }, AUTO_PLAY_TIME);
+  autoPlay(instance);
 }
 
 function onMouseDown(event) {
@@ -172,5 +163,5 @@ export default function init() {
   }
   initInstance();
   subscribe();
-  autoPlay();
+  autoPlay(instance);
 }
