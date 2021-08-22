@@ -9,6 +9,10 @@ $slide-marginRight: 40px;
   flex-direction: row;
   box-sizing: border-box;
   width: 80%;
+
+  @include tx-media(tablet) {
+    padding: 0;
+  }
 }
 
 .slider__title {

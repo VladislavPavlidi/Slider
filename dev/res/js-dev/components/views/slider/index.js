@@ -101,8 +101,6 @@ function onTouchEnd() {
   } else {
     sliderContent.style = `transform: translateX(${instance.scroll}px);`;
   }
-  document.removeEventListener('touchmove', onTouchMove);
-  document.removeEventListener('touchend', onTouchEnd);
 }
 
 function onTouchStart(event) {
