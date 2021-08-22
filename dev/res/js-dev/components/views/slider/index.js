@@ -11,6 +11,7 @@ let parent;
 let slides;
 let scrollbar;
 let scrollbarFill;
+let page;
 let pointStartX;
 let sliderTranslation;
 let horizontalCondition;
@@ -18,6 +19,7 @@ let horizontalCondition;
 let instance;
 
 function findElements() {
+  page = document.body;
   parent = document.querySelector('.slider');
   prev = parent.querySelector('.slider__navigation--prev');
   next = parent.querySelector('.slider__navigation--next');
@@ -25,6 +27,14 @@ function findElements() {
   slides = [...parent.querySelectorAll('.slide')];
   scrollbar = parent.querySelector('.slider__scrollbar');
   scrollbarFill = scrollbar.querySelector('.slider__scrollbar-fill');
+}
+
+function stuckPage() {
+  page.classList.add('page-is-stuck');
+}
+
+function unStuckPage() {
+  page.classList.remove('page-is-stuck');
 }
 
 function isMobile() {
@@ -101,9 +111,11 @@ function onTouchEnd() {
   } else {
     sliderContent.style = `transform: translateX(${instance.scroll}px);`;
   }
+  unStuckPage();
 }
 
 function onTouchStart(event) {
+  stuckPage();
   pointStartX = event ? event.touches[0].pageX : 0;
   document.addEventListener('touchmove', onTouchMove);
   document.addEventListener('touchend', onTouchEnd);
@@ -125,6 +137,7 @@ function onMouseUp() {
   }
   document.removeEventListener('mouseup', onMouseUp);
   document.removeEventListener('mousemove', onMouseMove);
+  unStuckPage();
 }
 
 export function setStartSliderCondition() {

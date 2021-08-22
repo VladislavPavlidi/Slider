@@ -27,6 +27,22 @@ body {
   margin: 0;
   background: $background;
 }
+
+.page {
+
+  &-is-stuck {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+  }
+
+}
+
 /* Phone Layout */
 
 @import '_layout-phone';
