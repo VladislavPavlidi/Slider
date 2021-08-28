@@ -5,10 +5,10 @@
 html {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  min-height: 100%;
 }
 
 // sass-lint:enable no-vendor-prefixes
@@ -18,36 +18,31 @@ body {
   #{--scrollbar-width}: calc(100vw - 100%);
   position: relative;
   display: flex;
-  align-items: center;
-  align-content: flex-start;
   flex-direction: column;
   flex-grow: 1;
   flex-shrink: 0;
-  overflow-x: hidden;
+  align-content: flex-start;
+  align-items: center;
   margin: 0;
+  overflow-x: hidden;
   background: $background;
 }
 
 .page {
-
   &-is-stuck {
     position: fixed;
-    overflow: hidden;
     width: 100%;
+    overflow: hidden;
 
     &::-webkit-scrollbar {
       display: none;
     }
-
   }
-
 }
 
 /* Phone Layout */
 
 @import '_layout-phone';
-
-
 
 /* Print Layout */
 

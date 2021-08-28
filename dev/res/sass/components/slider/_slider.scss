@@ -2,13 +2,13 @@ $slide-marginRight: 40px;
 
 .slider {
   display: flex;
-  flex-wrap: wrap;
-  padding: 160px 0;
-  margin: auto;
-  overflow: hidden;
   flex-direction: row;
+  flex-wrap: wrap;
   box-sizing: border-box;
   width: 80%;
+  margin: auto;
+  padding: 160px 0;
+  overflow: hidden;
 
   @include tx-media(tablet) {
     padding: 0;
@@ -16,11 +16,11 @@ $slide-marginRight: 40px;
 }
 
 .slider__title {
-  color: $blue;
   width: calc(50% + (#{$slide-marginRight} / 2));
+  margin: 0;
+  color: $blue;
   font-size: 50px;
   line-height: 1;
-  margin: 0;
 
   @include tx-media(tablet) {
     width: 100%;
@@ -30,8 +30,8 @@ $slide-marginRight: 40px;
 
 .slider__control-holder {
   display: flex;
-  width: 100%;
   flex-direction: row;
+  width: 100%;
 
   @include tx-media(tablet) {
     flex-wrap: wrap;
@@ -65,16 +65,16 @@ $slide-marginRight: 40px;
   position: absolute;
   width: 0;
   height: 100%;
-  transition: $UITransitionMedium;
   background-color: $blue-600;
+  transition: $UITransitionMedium;
 }
 
 .slider__navigation {
   position: relative;
   width: 60px;
   height: 60px;
-  border: 1px solid $blue-50;
   background-color: $white;
+  border: 1px solid $blue-50;
 
   &:hover {
     background-color: $blue-50;
@@ -119,9 +119,9 @@ $slide-marginRight: 40px;
 }
 
 .slider__content {
-  display: flex;
-  margin-top: 40px;
   position: relative;
-  transition: $UITransitionMedium;
+  display: flex;
   width: 100%;
+  margin-top: 40px;
+  transition: $UITransitionMedium;
 }
